@@ -20,7 +20,17 @@ contract Lottery {
     }
 
     function pickWinner() public {
-        uint index = random() % players.length;  // will only return valid array index nums
+        // will only return valid array index nums
+        uint index = random() % players.length;
+
+        // accesses the selected player address object
+        // call its transfer method and pass in reference to the contract balance
+        players[index].transfer(this.balance);
+
+        // reset contract state
+        // create a new dynamic array of type address
+        // note that when resizing dynamic array you must specify initial length (0)
+        players = new address[](0);
     }
 
 }
