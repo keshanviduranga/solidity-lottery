@@ -12,4 +12,11 @@ contract Lottery {
         require(msg.value > .01 ether);
         players.push(msg.sender);
     }
+
+    // block and now are global variables
+    // keccak256() preferred over deprecated sha3()
+    function random() private view returns (uint) {
+        return uint(keccak256(block.difficulty, now, players));
+    }
+
 }
