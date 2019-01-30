@@ -19,4 +19,8 @@ contract Lottery {
         return uint(keccak256(block.difficulty, now, players));
     }
 
+    function pickWinner() public {
+        uint index = random() % players.length;  // will only return valid array index nums
+    }
+
 }
