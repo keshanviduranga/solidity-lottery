@@ -20,6 +20,9 @@ contract Lottery {
     }
 
     function pickWinner() public {
+
+        require(msg.sender == manager);
+        
         // will only return valid array index nums
         uint index = random() % players.length;
 
