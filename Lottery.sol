@@ -19,14 +19,12 @@ contract Lottery {
         return uint(keccak256(block.difficulty, now, players));
     }
 
-    function pickWinner() public {
+    function pickWinner() public restricted {
 
-        require(msg.sender == manager);
-        
         // will only return valid array index nums
         uint index = random() % players.length;
 
-        // accesses the selected player address object
+        // access the selected player address object
         // call its transfer method and pass in reference to the contract balance
         players[index].transfer(this.balance);
 
@@ -34,6 +32,11 @@ contract Lottery {
         // create a new dynamic array of type address
         // note that when resizing dynamic array you must specify initial length (0)
         players = new address[](0);
+    }
+
+    modifier restricted() {
+        require(msg.sender == manager);
+        _;
     }
 
 }
