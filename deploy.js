@@ -29,6 +29,7 @@ const deploy = async () => {
         .deploy({ data: bytecode })
         .send({ gas: '1000000', from: accounts[0] });
 
+    console.log(interface);
     // Keep track of to which address the contract was deployed
     console.log('Contract deployed to', result.options.address);
 };
